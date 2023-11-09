@@ -1,2 +1,6 @@
 # Personal Website
-My personal website you can find at http://ndalton12.github.io/
+
+Graciously modified from [devfolio](https://github.com/RyanFitzgerald/devfolio), under MIT License.
+
+Available at http://ndalton12.github.io/
+
