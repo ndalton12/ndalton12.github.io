@@ -1,9 +1,9 @@
 {
-  "name": "devfolio",
+  "name": "ndalton-website",
   "private": true,
   "description": "A modern and production-ready personal portfolio + blog template built with GatsbyJs and TailwindCSS",
   "version": "0.1.0",
-  "author": "Ryan Fitzgerald",
+  "author": "Niall Dalton",
   "dependencies": {
     "animate.css": "^4.1.1",
     "gatsby": "^5.12.9",
@@ -49,13 +49,14 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public -b deploy"
+    "deploy": "gatsby clean && gatsby build && gh-pages -d public -b gh-pages",
+    "yeet": "gh-pages -d public -b gh-pages -f"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RyanFitzgerald/devfolio"
+    "url": "https://github.com/ndalton12/ndalton12.github.io"
   },
   "bugs": {
-    "url": "https://github.com/RyanFitzgerald/devfolio/issues"
+    "url": "https://github.com/ndalton12/ndalton12.github.io/issues"
   }
 }
