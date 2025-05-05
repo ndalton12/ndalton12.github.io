@@ -50,7 +50,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "deploy": "gatsby clean && gatsby build && gh-pages -d public -b gh-pages",
-    "yeet": "gh-pages -d public -b gh-pages -f"
+    "yeet": "sudo rm -r ./node_modules/.cache/gh-pages && gh-pages -d public -b gh-pages"
   },
   "repository": {
     "type": "git",

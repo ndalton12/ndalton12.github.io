@@ -14,8 +14,9 @@ module.exports = {
     linkedin: `https://www.linkedin.com/in/niall-dalton/`,
     // Content of the About Me section, I made this markdown so its formatted specially
     about: `
-Currently, I am a software developer at Amazon. I like physics, technology, and philosophy.
-Previously, I did research and ML projects at Activ Surgical, Northeastern University, and MIT Lincoln Lab.
+Currently, I am an Applied AI Engineer at Scale AI. I like physics, technology, and philosophy.
+Previously, I worked at Amazon on embedded software for Project Kuiper, a satellite internet constellation.
+I also did research and ML projects at Activ Surgical, Northeastern University, and MIT Lincoln Lab.
 
 If you're interested, here is my [resume](./resume.pdf). Better yet, here is a picture of my [dog](/tucker.jpg).
 
@@ -53,31 +54,31 @@ Here are a random assortment of things I find interesting:
           However, instead of deterministic outcomes, Shifting Morals posits that outcomes are probabilistic
           and that everything is up to chance.
           `,
-          link: 'https://github.com/ndalton12/shifting-morals',
+        link: 'https://github.com/ndalton12/shifting-morals',
       },
     ],
     // Optional: List your experience, they must have `name` and `description`. `link` is optional.
     experience: [
       {
+        name: 'Scale AI',
+        description: 'Applied AI Engineer, June 2024 - Present',
+        link: 'https://www.scale.com/',
+      },
+      {
         name: 'Amazon: Project Kuiper',
-        description: 'Embedded Satellite Software Engineer I and II, September 2021 - Present',
+        description: 'Software Engineer II, July 2023 - June 2024',
+        link: 'https://www.aboutamazon.com/what-we-do/devices-services/project-kuiper',
+      },
+      {
+        name: 'Amazon: Project Kuiper',
+        description: 'Software Engineer I, September 2021 - July 2023',
         link: 'https://www.aboutamazon.com/what-we-do/devices-services/project-kuiper',
       },
       {
         name: 'Activ Surgical',
         description: 'Machine Learning Intern, January 2021 - May 2021',
         link: 'https://www.activsurgical.com/',
-      },
-      {
-        name: 'Northeastern Counter-UAS Lab',
-        description: 'Research Assistant, January 2020 - June 2020',
-        link: 'https://research.northeastern.edu/ecuas-lab/',
-      },
-      {
-        name: 'MIT Lincoln Laboratory',
-        description: 'Deep Learning Research Intern, May 2019 - November 2019',
-        link: 'https://www.ll.mit.edu/',
-      },
+      }
     ],
     // Optional: List your skills, they must have `name` and `description`.
     skills: [
