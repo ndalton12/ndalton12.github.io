@@ -1,0 +1,71 @@
+---
+import { siteConfig } from '@/config';
+
+interface Props {
+  showBlogLink?: boolean;
+}
+
+const { showBlogLink = true } = Astro.props;
+---
+
+<header class="block mb-6 md:flex">
+  <div class="w-full max-w-[150px]">
+    <a href="/">
+      <img
+        class="rounded-full transform transition-all duration-150 hover:scale-105"
+        src="/me3_compressed.jpeg"
+        alt={siteConfig.name}
+      />
+    </a>
+  </div>
+  <div class="flex-none pt-6 md:pt-1 md:flex-1 md:pl-20">
+    <h1
+      class="text-5xl text-primary font-bold leading-tight hover:text-primary/80 animate-fade-in-down"
+    >
+      <a href="/">{siteConfig.name}</a>
+    </h1>
+    <p class="text-gray-600">{siteConfig.description}</p>
+    <ul class="mt-6 uppercase tracking-wider">
+      {
+        siteConfig.github && (
+          <li class="inline list-none pr-4">
+            <a
+              class="inline-block py-2 font-semibold text-xs text-gray-600 hover:text-black"
+              href={siteConfig.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </li>
+        )
+      }
+      {
+        siteConfig.linkedin && (
+          <li class="inline list-none pr-4">
+            <a
+              class="inline-block py-2 font-semibold text-xs text-gray-600 hover:text-black"
+              href={siteConfig.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </li>
+        )
+      }
+      {
+        showBlogLink && (
+          <li class="inline list-none pr-4">
+            <a
+              class="inline-block py-2 font-semibold text-xs text-gray-600 hover:text-black"
+              href="/blog"
+            >
+              Blog
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+</header>

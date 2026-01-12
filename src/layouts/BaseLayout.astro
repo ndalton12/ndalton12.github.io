@@ -1,0 +1,67 @@
+---
+import '@/styles/globals.css';
+import { siteConfig } from '@/config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.title;
+const pageDescription = description || siteConfig.description;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={pageDescription} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/png" href="/icon.png" />
+    <title>{pageTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+  </head>
+  <body>
+    <div class="relative">
+      <!-- Decorative dots pattern -->
+      <svg
+        class="hidden fixed transform right-0 top-[5%] z-0 xl:block"
+        width="404"
+        height="784"
+        fill="none"
+        viewBox="0 0 404 784"
+      >
+        <defs>
+          <pattern
+            id="dots-pattern"
+            x="0"
+            y="0"
+            width="20"
+            height="20"
+            patternUnits="userSpaceOnUse"
+          >
+            <rect
+              x="0"
+              y="0"
+              width="4"
+              height="4"
+              class="text-gray-200"
+              fill="#edf2f7"></rect>
+          </pattern>
+        </defs>
+        <rect width="404" height="784" fill="url(#dots-pattern)"></rect>
+      </svg>
+
+      <main class="p-8 relative lg:max-w-[75%] max-w-prose xs:p-24">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

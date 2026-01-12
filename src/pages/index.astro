@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Section from '@/components/Section.astro';
+import SummaryItem from '@/components/SummaryItem.astro';
+import AboutContent from '@/components/AboutContent.astro';
+import { siteConfig } from '@/config';
+import { getCollection } from 'astro:content';
+
+// Get latest blog posts
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+
+const hasBlog = posts.length > 0;
+---
+
+<BaseLayout>
+  <Header showBlogLink={hasBlog} />
+
+  <!-- About Section -->
+  <Section title="About Me">
+    <AboutContent />
+  </Section>
+
+  <!-- Projects Section -->
+  {
+    siteConfig.projects.length > 0 && (
+      <Section title="Projects">
+        {siteConfig.projects.map((project) => (
+          <SummaryItem
+            name={project.name}
+            description={project.description}
+            link={project.link}
+          />
+        ))}
+      </Section>
+    )
+  }
+
+  <!-- Experience Section -->
+  {
+    siteConfig.experience.length > 0 && (
+      <Section title="Experience">
+        {siteConfig.experience.map((exp) => (
+          <SummaryItem
+            name={exp.name}
+            description={exp.description}
+            link={exp.link}
+          />
+        ))}
+      </Section>
+    )
+  }
+
+  <!-- Skills Section -->
+  {
+    siteConfig.skills.length > 0 && (
+      <Section title="Skills">
+        {siteConfig.skills.map((skill) => (
+          <SummaryItem name={skill.name} description={skill.description} />
+        ))}
+      </Section>
+    )
+  }
+
+  <!-- Blog Section -->
+  {
+    hasBlog && (
+      <Section title="Blog">
+        {posts.map((post) => (
+          <SummaryItem
+            name={post.data.title}
+            description={post.data.description}
+            link={`/blog/${post.slug}`}
+          />
+        ))}
+      </Section>
+    )
+  }
+</BaseLayout>

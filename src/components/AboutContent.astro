@@ -1,0 +1,52 @@
+---
+import { siteConfig } from '@/config';
+
+// Simple markdown-like link parser for the about section
+function parseMarkdownLinks(text: string): string {
+  // Convert markdown links [text](url) to HTML links
+  return text.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    '<a href="$2" class="text-primary underline hover:text-primary/80" target="_blank" rel="noopener noreferrer">$1</a>'
+  );
+}
+
+// Convert markdown list items to HTML
+function parseMarkdown(text: string): string {
+  let html = parseMarkdownLinks(text);
+
+  // Split into lines and process
+  const lines = html.split('\n');
+  let inList = false;
+  let result: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    if (trimmed.startsWith('* ')) {
+      if (!inList) {
+        result.push('<ul class="mb-6 ml-6 list-disc">');
+        inList = true;
+      }
+      result.push(`<li>${trimmed.slice(2)}</li>`);
+    } else {
+      if (inList) {
+        result.push('</ul>');
+        inList = false;
+      }
+      if (trimmed) {
+        result.push(`<p class="mb-4">${trimmed}</p>`);
+      }
+    }
+  }
+
+  if (inList) {
+    result.push('</ul>');
+  }
+
+  return result.join('\n');
+}
+
+const aboutHtml = parseMarkdown(siteConfig.about);
+---
+
+<div class="prose" set:html={aboutHtml} />

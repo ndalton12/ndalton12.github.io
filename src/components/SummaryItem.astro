@@ -1,0 +1,29 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  link?: string;
+}
+
+const { name, description, link } = Astro.props;
+---
+
+<div class="mb-6">
+  <h3
+    class:list={[
+      'font-semibold text-gray-900 pb-1',
+      link && 'hover:underline hover:text-black',
+    ]}
+  >
+    {
+      link ? (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+          {name}
+        </a>
+      ) : (
+        name
+      )
+    }
+  </h3>
+  <p class="text-md text-gray-600 font-light">{description}</p>
+</div>

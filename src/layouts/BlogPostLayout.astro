@@ -1,0 +1,24 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import { formatDate } from '@/lib/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+}
+
+const { title, description, date } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <article>
+    <h1 class="mt-16 text-4xl text-gray-900 font-bold">{title}</h1>
+    <p class="text-gray-600 font-light">Posted on {formatDate(date)}</p>
+    <div class="mt-16 prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
