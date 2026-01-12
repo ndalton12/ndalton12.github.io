@@ -11,7 +11,10 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    react(),
+    react({
+      // Enable React hydration for interactive components
+      include: ['**/components/**/*.tsx'],
+    }),
     mdx(),
     sitemap(),
   ],

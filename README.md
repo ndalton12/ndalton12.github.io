@@ -1,6 +1,6 @@
 # Niall Dalton - Personal Website
 
-A modern personal portfolio and blog built with **Astro**, **React**, **Tailwind CSS**, and **shadcn/ui**.
+A modern personal portfolio and blog built with **Astro**, **React**, **Tailwind CSS**, and **shadcn/ui**. Modified to use astro from [devfolio](https://github.com/RyanFitzgerald/devfolio).
 
 ## ✨ Features
 
@@ -186,13 +186,21 @@ Components are added to `src/components/ui/`.
 The site is configured for GitHub Pages deployment:
 
 ```bash
-# Build the site
-pnpm build   # or: bun run build / npm run build
+# Build and deploy to gh-pages branch
+pnpm deploy        # or: npm run deploy
 
-# Deploy (using gh-pages or GitHub Actions)
+# Or just build (for CI/CD)
+pnpm build         # or: bun run build / npm run build
 ```
 
-For GitHub Actions, create `.github/workflows/deploy.yml`:
+After running `pnpm deploy`, configure your GitHub repo:
+1. Go to Settings → Pages
+2. Set source to "Deploy from a branch"
+3. Select `gh-pages` branch
+
+### GitHub Actions (Alternative)
+
+For automatic deployment on push, create `.github/workflows/deploy.yml`:
 
 ```yaml
 name: Deploy to GitHub Pages

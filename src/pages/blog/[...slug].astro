@@ -1,7 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BlogPostLayout from '@/layouts/BlogPostLayout.astro';
-import { Footnote, WikiLink } from '@/components/mdx';
+import { WikiLink } from '@/components/mdx/WikiLink';
+import { Footnote } from '@/components/mdx/Footnote';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -17,12 +18,6 @@ interface Props {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
-
-// MDX components available in all blog posts
-const components = {
-  Footnote,
-  WikiLink,
-};
 ---
 
 <BlogPostLayout
@@ -30,5 +25,142 @@ const components = {
   description={post.data.description}
   date={post.data.date}
 >
-  <Content components={components} />
+  <Content components={{ WikiLink, Footnote }} />
 </BlogPostLayout>
+
+<!-- Wikipedia preview hover card -->
+<div
+  id="wiki-preview"
+  class="fixed z-50 hidden w-96 rounded-md border bg-popover p-4 text-popover-foreground shadow-md"
+>
+  <img
+    id="wiki-preview-img"
+    class="mb-3 hidden h-32 w-full rounded-md object-cover"
+    alt=""
+  />
+  <h4 id="wiki-preview-title" class="font-semibold"></h4>
+  <p id="wiki-preview-extract" class="mt-1 text-sm text-muted-foreground"></p>
+  <a
+    id="wiki-preview-link"
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-3 inline-flex items-center gap-1 text-xs text-primary hover:underline"
+  >
+    Read on Wikipedia →
+  </a>
+</div>
+
+<script>
+  // Configurable preview length (default: 400 characters)
+  const DEFAULT_PREVIEW_LENGTH = 400;
+
+  const preview = document.getElementById('wiki-preview');
+  const previewImg = document.getElementById(
+    'wiki-preview-img'
+  ) as HTMLImageElement;
+  const previewTitle = document.getElementById('wiki-preview-title');
+  const previewExtract = document.getElementById('wiki-preview-extract');
+  const previewLink = document.getElementById(
+    'wiki-preview-link'
+  ) as HTMLAnchorElement;
+
+  const cache: Record<string, any> = {};
+  let hideTimeout: ReturnType<typeof setTimeout>;
+  let currentTarget: HTMLElement | null = null;
+
+  async function fetchWikiSummary(term: string) {
+    if (cache[term]) return cache[term];
+
+    const apiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(term.replace(/ /g, '_'))}`;
+    const res = await fetch(apiUrl);
+    if (!res.ok) throw new Error('Failed to fetch');
+
+    const data = await res.json();
+    cache[term] = data;
+    return data;
+  }
+
+  function showPreview(target: HTMLElement, data: any) {
+    if (
+      !preview ||
+      !previewTitle ||
+      !previewExtract ||
+      !previewLink ||
+      !previewImg
+    )
+      return;
+
+    // Get preview length from data attribute or use default
+    const maxLength =
+      parseInt(target.getAttribute('data-wiki-preview-length') || '') ||
+      DEFAULT_PREVIEW_LENGTH;
+
+    previewTitle.textContent = data.title;
+    previewExtract.textContent =
+      data.extract?.length > maxLength
+        ? data.extract.slice(0, maxLength) + '...'
+        : data.extract || '';
+    previewLink.href = target.getAttribute('href') || '#';
+
+    if (data.thumbnail?.source) {
+      previewImg.src = data.thumbnail.source;
+      previewImg.classList.remove('hidden');
+    } else {
+      previewImg.classList.add('hidden');
+    }
+
+    // Position the preview above the link
+    const rect = target.getBoundingClientRect();
+
+    let left = rect.left + rect.width / 2 - 192; // 192 = half of 384 (w-96)
+    let top = rect.top - 8;
+
+    // Keep within viewport
+    left = Math.max(8, Math.min(left, window.innerWidth - 400));
+
+    preview.style.left = `${left}px`;
+    preview.style.bottom = `${window.innerHeight - top}px`;
+    preview.style.top = 'auto';
+    preview.classList.remove('hidden');
+  }
+
+  function hidePreview() {
+    hideTimeout = setTimeout(() => {
+      preview?.classList.add('hidden');
+      currentTarget = null;
+    }, 100);
+  }
+
+  // Attach listeners to all WikiLinks
+  document.querySelectorAll('[data-wiki-term]').forEach((link) => {
+    link.addEventListener('mouseenter', async (e) => {
+      clearTimeout(hideTimeout);
+      const target = e.currentTarget as HTMLElement;
+      currentTarget = target;
+      const term = target.getAttribute('data-wiki-term');
+
+      if (!term || !previewExtract) return;
+
+      previewExtract.textContent = 'Loading...';
+      showPreview(target, { title: term, extract: 'Loading...' });
+
+      try {
+        const data = await fetchWikiSummary(term);
+        if (currentTarget === target) {
+          showPreview(target, data);
+        }
+      } catch {
+        if (currentTarget === target && previewExtract) {
+          previewExtract.textContent = 'Could not load preview';
+        }
+      }
+    });
+
+    link.addEventListener('mouseleave', hidePreview);
+  });
+
+  // Keep preview visible when hovering over it
+  preview?.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+  preview?.addEventListener('mouseleave', hidePreview);
+</script>
