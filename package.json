@@ -12,7 +12,7 @@
     "preview": "astro preview",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,mdx,astro}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
-    "deploy": "astro build && gh-pages -d dist -b gh-pages"
+    "deploy": "astro build && gh-pages -d dist -b gh-pages --dotfiles"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.0.0",
