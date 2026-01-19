@@ -13,8 +13,8 @@ export const siteConfig = {
 
   // Content of the About Me section (markdown supported)
   about: `
-Currently, I am an Applied AI Engineer at Scale AI. I like physics, technology, and philosophy.
-Previously, I worked at Amazon on embedded software for Project Kuiper, a satellite internet constellation.
+Currently, I am taking a break from working to do my Masters in Machine Learning at University College London. I like physics, technology, and philosophy.
+Previously, I was an Applied AI Engineer at Scale AI and a software engineer at Amazon on Project Kuiper, a satellite internet constellation.
 I also did research and ML projects at Activ Surgical, Northeastern University, and MIT Lincoln Lab.
 
 If you're interested, here is my [resume](/resume.pdf). Better yet, here is a picture of my [dog](/tucker.jpg).
@@ -68,11 +68,6 @@ Here are a random assortment of things I find interesting:
       name: 'Amazon: Project Kuiper',
       description: 'Software Engineer I, September 2021 - July 2023',
       link: 'https://www.aboutamazon.com/what-we-do/devices-services/project-kuiper',
-    },
-    {
-      name: 'Activ Surgical',
-      description: 'Machine Learning Intern, January 2021 - May 2021',
-      link: 'https://www.activsurgical.com/',
     },
   ],
 
