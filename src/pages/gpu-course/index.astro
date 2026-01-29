@@ -110,7 +110,9 @@
         border-radius: 8px;
         text-decoration: none;
         color: inherit;
-        transition: border-color 0.15s, box-shadow 0.15s;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
       }
 
       .resource:hover {
@@ -185,6 +187,60 @@
         color: var(--text-muted);
         font-size: 0.9rem;
       }
+
+      /* Section subtitle */
+      .section-subtitle {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        margin-top: -0.5rem;
+      }
+
+      /* Lectures */
+      .lecture {
+        padding: 1.25rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+
+      .lecture-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 0.75rem;
+      }
+
+      .lecture-title {
+        font-family: 'JetBrains Mono', monospace;
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+
+      .lecture-date {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+
+      .lecture-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .lecture-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .lecture-links a:hover {
+        color: var(--accent-dim);
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
@@ -192,38 +248,62 @@
       <header>
         <h1>GPU Computing Crash Course</h1>
         <p class="subtitle">
-          A curated collection of resources for learning CUDA and GPU programming.
+          A curated collection of resources for learning CUDA and GPU
+          programming.
         </p>
       </header>
 
       <section>
-        <h2>Fundamentals</h2>
-        <div class="resources">
-          <a href="#" class="resource">
-            <div class="resource-title">CUDA C++ Programming Guide</div>
-            <div class="resource-desc">Official NVIDIA documentation covering the CUDA programming model.</div>
-            <span class="resource-tag">docs</span>
-          </a>
-          <a href="#" class="resource">
-            <div class="resource-title">GPU Architecture Overview</div>
-            <div class="resource-desc">Understanding SMs, warps, and the memory hierarchy.</div>
-            <span class="resource-tag">article</span>
-          </a>
+        <h2>Lectures</h2>
+        <div class="lecture">
+          <div class="lecture-header">
+            <span class="lecture-title">Lecture 1</span>
+            <span class="lecture-date">February 4, 2025</span>
+          </div>
+          <p class="section-subtitle">Location: Malet Place 1.03</p>
+          <div class="lecture-links">
+            <a
+              href="https://docs.google.com/presentation/d/1JgdmR_22HVcotAzSqckPpTBj2GyGADw62eUWs_iRybY/edit?usp=sharing"
+              >Slides</a
+            >
+            <a href="#">Colab</a>
+          </div>
+        </div>
+        <div class="lecture">
+          <div class="lecture-header">
+            <span class="lecture-title">Lecture 2</span>
+            <span class="lecture-date">February 11, 2025</span>
+          </div>
+          <p class="section-subtitle">Location: Malet Place 1.03</p>
+          <div class="lecture-links">
+            <a href="#">Slides</a>
+            <a href="#">Colab</a>
+          </div>
         </div>
       </section>
 
       <section>
-        <h2>Getting Started</h2>
+        <h2>Fundamentals</h2>
         <div class="resources">
-          <a href="#" class="resource">
-            <div class="resource-title">CUDA Toolkit Installation</div>
-            <div class="resource-desc">Setting up your development environment.</div>
-            <span class="resource-tag">setup</span>
+          <a
+            href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/"
+            class="resource"
+          >
+            <div class="resource-title">CUDA C++ Programming Guide</div>
+            <div class="resource-desc">
+              Official NVIDIA documentation covering the CUDA programming model.
+            </div>
+            <span class="resource-tag">docs</span>
           </a>
-          <a href="#" class="resource">
-            <div class="resource-title">Your First CUDA Program</div>
-            <div class="resource-desc">Hello world and vector addition.</div>
-            <span class="resource-tag">tutorial</span>
+          <a
+            href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/"
+            class="resource"
+          >
+            <div class="resource-title">GPU Architecture Overview</div>
+            <div class="resource-desc">
+              Understanding SMs, warps, and the memory hierarchy.
+            </div>
+            <span class="resource-tag">article</span>
           </a>
         </div>
       </section>
@@ -231,14 +311,49 @@
       <section>
         <h2>Courses & Tutorials</h2>
         <div class="resources">
-          <a href="#" class="resource">
+          <a href="https://github.com/srush/GPU-Puzzles" class="resource">
             <div class="resource-title">GPU Puzzles</div>
-            <div class="resource-desc">Sasha Rush's interactive GPU programming puzzles.</div>
+            <div class="resource-desc">
+              Sasha Rush's interactive GPU programming puzzles.
+            </div>
             <span class="resource-tag">interactive</span>
           </a>
-          <a href="#" class="resource">
+          <a
+            href="https://stanford-cs336.github.io/spring2025/"
+            class="resource"
+          >
+            <div class="resource-title">Stanford CS336</div>
+            <div class="resource-desc">
+              Language Modeling from Scratch - covers GPU programming for LLMs.
+            </div>
+            <span class="resource-tag">course</span>
+          </a>
+          <a href="https://github.com/gpu-mode/lectures" class="resource">
+            <div class="resource-title">GPU Mode Lectures</div>
+            <div class="resource-desc">
+              Community-driven GPU programming lecture materials.
+            </div>
+            <span class="resource-tag">lectures</span>
+          </a>
+          <a
+            href="https://uvadlc-notebooks.readthedocs.io/en/latest/index.html"
+            class="resource"
+          >
+            <div class="resource-title">UvA Deep Learning Tutorials</div>
+            <div class="resource-desc">
+              Comprehensive deep learning notebooks with GPU optimization
+              content.
+            </div>
+            <span class="resource-tag">notebooks</span>
+          </a>
+          <a
+            href="https://www.amazon.com/Programming-Massively-Parallel-Processors-Hands/dp/0323912311"
+            class="resource"
+          >
             <div class="resource-title">PMPP Book</div>
-            <div class="resource-desc">Programming Massively Parallel Processors - the classic textbook.</div>
+            <div class="resource-desc">
+              Programming Massively Parallel Processors - the classic textbook.
+            </div>
             <span class="resource-tag">book</span>
           </a>
         </div>
@@ -247,36 +362,67 @@
       <section>
         <h2>Tools & Libraries</h2>
         <ul class="link-list">
-          <li><a href="#">cuBLAS - GPU-accelerated BLAS</a></li>
-          <li><a href="#">cuDNN - Deep learning primitives</a></li>
-          <li><a href="#">Triton - Python-like GPU programming</a></li>
-          <li><a href="#">Nsight - Profiling and debugging</a></li>
+          <li>
+            <a href="https://developer.nvidia.com/cublas"
+              >cuBLAS - GPU-accelerated BLAS</a
+            >
+          </li>
+          <li>
+            <a href="https://developer.nvidia.com/cudnn"
+              >cuDNN - Deep learning primitives</a
+            >
+          </li>
+          <li>
+            <a href="https://triton-lang.org/"
+              >Triton - Python-like GPU programming</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/meta-pytorch/tritonparse"
+              >TritonParse - Compiler tracer and visualizer</a
+            >
+          </li>
+          <li>
+            <a href="https://developer.nvidia.com/nsight-systems"
+              >Nsight - Profiling and debugging</a
+            >
+          </li>
         </ul>
-      </section>
-
-      <section>
-        <h2>Practice</h2>
-        <div class="resources">
-          <a href="#" class="resource">
-            <div class="resource-title">CUDA Samples</div>
-            <div class="resource-desc">Official NVIDIA code samples.</div>
-            <span class="resource-tag">code</span>
-          </a>
-          <a href="#" class="resource">
-            <div class="resource-title">Project Ideas</div>
-            <div class="resource-desc">Matrix multiplication, convolutions, parallel reductions.</div>
-            <span class="resource-tag">exercises</span>
-          </a>
-        </div>
       </section>
 
       <section>
         <h2>Advanced Topics</h2>
         <ul class="link-list">
-          <li><a href="#">Memory coalescing and bank conflicts</a></li>
-          <li><a href="#">Occupancy optimization</a></li>
-          <li><a href="#">Tensor cores and mixed precision</a></li>
-          <li><a href="#">Multi-GPU programming</a></li>
+          <li>
+            <a
+              href="https://developer.nvidia.com/blog/how-access-global-memory-efficiently-cuda-c-kernels/"
+              >Memory coalescing and bank conflicts</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy"
+              >Occupancy optimization</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.nvidia.com/blog/programming-tensor-cores-cuda-9/"
+              >Tensor cores and mixed precision</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/DL2/High-performant_DL/Multi_GPU/hpdlmultigpu.html"
+              >Multi-GPU programming</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://huggingface.co/spaces/nanotron/ultrascale-playbook?section=profiling_gpu_compute_and_communication"
+              >Ultra-Scale Playbook - Profiling and distributed training</a
+            >
+          </li>
         </ul>
       </section>
 
